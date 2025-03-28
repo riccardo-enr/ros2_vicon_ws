@@ -49,5 +49,6 @@
                 "ms-vsliveshare.vsliveshare"
             ]
         }
-    }
+    },
+    "postCreateCommand": "echo 'source /opt/ros/humble/setup.bash' >> ~/.bashrc && mkdir -p ~/ros2_vicon_ws/src && cd ~/ros2_vicon_ws && colcon build --symlink-install && echo 'source ~/ros2_vicon_ws/install/setup.bash' >> ~/.bashrc && echo 'ROS2 Vicon development environment setup complete'"
 }
