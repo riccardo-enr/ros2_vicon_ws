@@ -1,0 +1,36 @@
+FROM althack/ros2:jazzy-dev
+
+# Install vrnp mocap from apt
+RUN apt update && apt install -y --no-install-recommends \
+    gnupg \
+    meson \
+    curl \
+    ninja-build \
+    pkg-config \
+    libyaml-dev \
+    python3-yaml \
+    python3-ply \
+    python3-jinja2 \
+    libevent-dev \
+    libdrm-dev \
+    libcap-dev \
+    python3-pip \
+    libeigen3-dev \
+    ros-jazzy-rosbag2-storage-mcap \
+    build-essential \
+    python3-dev \
+    python3-pip \
+    python3-setuptools \
+    python3-wheel \
+    cmake \
+    clang \
+    clangd \
+    ros-jazzy-vrpn-mocap* \
+    && apt-get clean \
+    && apt-get autoremove \
+    && rm -rf /var/cache/apt/archives/* \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install uxrce dds
+ARG WORKSPACE="/workspaces/ros2_vicon_ws"
+RUN echo "if [ -f ${WORKSPACE}/install/setup.bash ]; then source ${WORKSPACE}/install/setup.bash; fi" >> /home/ros/.bashrc
