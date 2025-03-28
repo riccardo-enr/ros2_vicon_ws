@@ -10,5 +10,5 @@
 
 [submodule "vrpn_mocap"]
     path = src/vrpn_mocap
-    url = https://github.com/ros-drivers/vrpn_client_ros.git
+    url = https://github.com/alvinsunyixiao/vrpn_mocap.git
     branch = main
