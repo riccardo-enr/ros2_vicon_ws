@@ -16,7 +16,9 @@
         "--security-opt=apparmor:unconfined",
         "--volume=/tmp/.X11-unix:/tmp/.X11-unix",
         "--volume=/mnt/wslg:/mnt/wslg",
-        "--ipc=host"
+        "--ipc=host",
+        "--device=/dev/ttyUSB0:/dev/ttyUSB0",
+        "--group-add=dialout"
         // uncomment to use intel iGPU
         // "--device=/dev/dri"
     ],
