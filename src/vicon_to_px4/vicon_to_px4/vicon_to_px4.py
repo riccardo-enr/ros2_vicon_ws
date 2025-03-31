@@ -2,8 +2,10 @@ import rclpy
 import numpy as np
 from rclpy.node import Node
 from scipy.spatial.transform import Rotation
-from geometry_msgs.msg import Pose
+from geometry_msgs.msg import PoseStamped
 from px4_msgs.msg import VehicleOdometry
+
+from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSDurabilityPolicy, QoSLivelinessPolicy
 
 
 class ViconToPx4Node(Node):
@@ -14,23 +16,32 @@ class ViconToPx4Node(Node):
 
         # Declare parameters
         self.declare_parameter('pose_topic', '/vrpn_mocap/Obj1/pose')
+        pose_topic = self.get_parameter('pose_topic').value
+
+        qos_profile = QoSProfile(
+            reliability=QoSReliabilityPolicy.BEST_EFFORT,
+            durability=QoSDurabilityPolicy.VOLATILE,
+            liveliness=QoSLivelinessPolicy.AUTOMATIC,
+            depth=5
+        )
 
         # Create publisher and subscriber
         self._odom_pub = self.create_publisher(
             VehicleOdometry,
-            '/fmu/in/vehicle_visual_odometry',
+            '/fmu/in/vehicle_mocap_odometry',
             10
         )
 
         self._pose_sub = self.create_subscription(
-            Pose,
-            self.get_parameter('pose_topic').value,
+            PoseStamped,
+            '/vrpn_mocap/Obj1/pose',
             self._pose_callback,
-            10
+            qos_profile
         )
 
     def _pose_callback(self, msg):
         """Process incoming Pose messages and publish converted odometry."""
+        self.get_logger().info("Received VICON pose message", once=True)
         odom_msg = self._convert_enu_to_ned(msg)
         self._odom_pub.publish(odom_msg)
 
@@ -43,17 +54,17 @@ class ViconToPx4Node(Node):
 
         # Convert position (ENU -> NED)
         odom.position = [
-            float(pose_msg.position.y),   # North
-            float(pose_msg.position.x),   # East
-            float(-pose_msg.position.z)   # Down
+            float(pose_msg.pose.position.y),   # North
+            float(pose_msg.pose.position.x),   # East
+            float(-pose_msg.pose.position.z)   # Down
         ]
 
         # Convert orientation (ENU -> NED)
         enu_quat = [
-            pose_msg.orientation.x,
-            pose_msg.orientation.y,
-            pose_msg.orientation.z,
-            pose_msg.orientation.w
+            pose_msg.pose.orientation.x,
+            pose_msg.pose.orientation.y,
+            pose_msg.pose.orientation.z,
+            pose_msg.pose.orientation.w
         ]
 
         # Create rotation matrices
