@@ -26,6 +26,7 @@ RUN apt update && apt install -y --no-install-recommends \
     clang \
     clangd \
     ros-humble-vrpn-mocap* \
+    netbase \
     && apt-get clean \
     && apt-get autoremove \
     && rm -rf /var/cache/apt/archives/* \
