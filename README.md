@@ -1,25 +1,23 @@
-# ROS 2 Vicon Workspace
+# Workspace ROS 2 Vicon
 
-Workspace to be used on the UAVs for communication with the Vicon system.
-This workspace contains the following packages:
+Workspace da utilizzare sugli UAV per la comunicazione con il sistema Vicon.
+Questo workspace contiene i seguenti pacchetti:
 * `vrpn_mocap`
 * `px4_msgs`
 * `Micro-XRCE-DDS-Agent`
 
-## Installation
+## Installazione
 
-1. Clone the repository
-2. Install the submodules
+1. Clonare la repository
+2. Installare i sottomoduli
 
     ```bash
     git submodule update --init --recursive
     ```
 
-## Devcontainer installation
+## Installazione Devcontainer
 
-- Ensure the VSCode devcontainer extension is installed
-- Ensure that Docker is installed and running
-- Open the folder from the workspace path
-- Open the command palette (Ctrl+Shift+P) and select "Remote-Containers: Open Folder in Container..."
-
-
+- Assicurarsi che l'estensione devcontainer di VSCode sia installata
+- Assicurarsi che Docker sia installato e in esecuzione
+- Aprire la cartella dal percorso del workspace
+- Aprire la command palette (Ctrl+Shift+P) e selezionare "Remote-Containers: Open Folder in Container..."
