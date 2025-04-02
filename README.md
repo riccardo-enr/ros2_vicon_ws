@@ -21,3 +21,12 @@ Questo workspace contiene i seguenti pacchetti:
 - Assicurarsi che Docker sia installato e in esecuzione
 - Aprire la cartella dal percorso del workspace
 - Aprire la command palette (Ctrl+Shift+P) e selezionare "Remote-Containers: Open Folder in Container..."
+
+# Parametri autopilota
+
+| **Parameter**  | **Changed value**       | **Default value**       |
+| :------------- | :---------------------- | :---------------------- |
+| EKF2_BARO_CTRL | 0 (Disabled)            | 1 (Enabled)             |
+| EKF2_EV_CTRL   | 3 (Horizontal+Vertical) | 15 (All flags selected) |
+| EKF2_EV_DELAY  | 10.0 ms                 | 0.0 ms                  |
+| EKF2_HGT_REF   | 3 (Vision)              | 1 (GPS)                 |
