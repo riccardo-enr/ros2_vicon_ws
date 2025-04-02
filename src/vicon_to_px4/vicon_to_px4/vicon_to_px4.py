@@ -77,6 +77,11 @@ class ViconToPx4Node(Node):
         odom.q = ned_quat.tolist()
         odom.pose_frame = VehicleOdometry.POSE_FRAME_NED
 
+        # Variance
+        odom.position_variance = [0.001] * 3
+        odom.orientation_variance = [0.001] * 4
+        odom.velocity_variance = [0.001] * 3
+
         return odom
 
 
