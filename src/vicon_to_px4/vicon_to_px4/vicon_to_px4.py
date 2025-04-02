@@ -28,7 +28,7 @@ class ViconToPx4Node(Node):
         # Create publisher and subscriber
         self._odom_pub = self.create_publisher(
             VehicleOdometry,
-            '/fmu/in/vehicle_mocap_odometry',
+            '/fmu/in/vehicle_visual_odometry',
             10
         )
 
